@@ -1,3 +1,35 @@
+app/
+├── Domain/                          # Núcleo del dominio (Hexágono interno)
+│   ├── Users/                       # Lógica de negocio para usuarios
+│   │   ├── Entity/                  # Entidades del dominio
+│   │   ├── Repository/              # Interfaces de persistencia
+│   │   └── Service/                 # Servicios de dominio
+│   ├── Spaces/                      # Lógica de negocio para espacios
+│   ├── Reservations/                # Lógica de negocio para reservas
+│   └── Notifications/               # Lógica de negocio para notificaciones
+│
+├── Application/                     # Casos de uso (Capa de aplicación)
+│   ├── Users/                       # Casos de uso de usuarios
+│   ├── Spaces/                      # Casos de uso de espacios
+│   ├── Reservations/                # Casos de uso de reservas
+│   └── Notifications/               # Casos de uso de notificaciones
+│
+├── Infrastructure/                  # Adaptadores externos (Hexágono externo)
+│   ├── Persistence/                 # Persistencia de datos
+│   │   ├── Eloquent/                # Implementaciones concretas (ORM)
+│   │   └── Migrations/              # Migraciones de base de datos
+│   ├── Http/                        # Controladores HTTP (API)
+│   │   ├── Controllers/             # Endpoints y lógica de presentación
+│   │   ├── Requests/                # Validación de datos de entrada
+│   │   └── Resources/               # Formateo de respuestas
+│   ├── Notifications/               # Adaptadores de notificaciones
+│   └── External/                    # Integraciones externas (por ejemplo Google Calendar)
+│
+└── Providers/                       # Inyección de dependencias
+    └── DomainServiceProvider.php
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
