@@ -1,32 +1,165 @@
+# Estructura del Proyecto
+
+Arquitectura basada en Clean Architecture/Hexagonal organizada en capas de dominio, aplicación e infraestructura.
+
+## 🏛️ Estructura de Directorios
 app/
 ├── Domain/                          # Núcleo del dominio (Hexágono interno)
-│   ├── Users/                       # Lógica de negocio para usuarios
-│   │   ├── Entity/                  # Entidades del dominio
-│   │   ├── Repository/              # Interfaces de persistencia
-│   │   └── Service/                 # Servicios de dominio
-│   ├── Spaces/                      # Lógica de negocio para espacios
-│   ├── Reservations/                # Lógica de negocio para reservas
-│   └── Notifications/               # Lógica de negocio para notificaciones
+
+│   ├── Users/
+
+│   │   ├── Entity/
+
+│   │   │   └── User.php
+
+│   │   ├── Repository/
+
+│   │   │   └── UserRepositoryInterface.php
+
+│   │   └── Service/
+
+│   │       └── UserDomainService.php
+
+│   ├── Spaces/
+
+│   │   ├── Entity/
+
+│   │   │   └── Space.php
+
+│   │   ├── Repository/
+
+│   │   │   └── SpaceRepositoryInterface.php
+
+│   │   └── Service/
+
+│   │       └── SpaceDomainService.php
+
+│   ├── Reservations/
+
+│   │   ├── Entity/
+
+│   │   │   └── Reservation.php
+
+│   │   ├── Repository/
+
+│   │   │   └── ReservationRepositoryInterface.php
+
+│   │   └── Service/
+
+│   │       └── ReservationDomainService.php
+
+│   └── Notifications/
+
+│       ├── Entity/
+
+│       │   └── Notification.php
+
+│       └── Service/
+
+│           └── NotificationDomainService.php
+
 │
+
 ├── Application/                     # Casos de uso (Capa de aplicación)
-│   ├── Users/                       # Casos de uso de usuarios
-│   ├── Spaces/                      # Casos de uso de espacios
-│   ├── Reservations/                # Casos de uso de reservas
-│   └── Notifications/               # Casos de uso de notificaciones
+
+│   ├── Users/
+
+│   │   ├── CreateUserUseCase.php
+
+│   │   ├── AuthenticateUserUseCase.php
+
+│   │   └── GetUserProfileUseCase.php
+
+│   ├── Spaces/
+
+│   │   ├── ListAvailableSpacesUseCase.php
+
+│   │   ├── GetSpaceDetailsUseCase.php
+
+│   │   └── CreateSpaceUseCase.php
+
+│   ├── Reservations/
+
+│   │   ├── CreateReservationUseCase.php
+
+│   │   ├── GetUserReservationsUseCase.php
+
+│   │   ├── GetReservationsByDateUseCase.php
+
+│   │   └── CancelReservationUseCase.php
+
+│   └── Notifications/
+
+│       └── SendConfirmationUseCase.php
+
 │
 ├── Infrastructure/                  # Adaptadores externos (Hexágono externo)
-│   ├── Persistence/                 # Persistencia de datos
-│   │   ├── Eloquent/                # Implementaciones concretas (ORM)
-│   │   └── Migrations/              # Migraciones de base de datos
-│   ├── Http/                        # Controladores HTTP (API)
-│   │   ├── Controllers/             # Endpoints y lógica de presentación
-│   │   ├── Requests/                # Validación de datos de entrada
-│   │   └── Resources/               # Formateo de respuestas
-│   ├── Notifications/               # Adaptadores de notificaciones
-│   └── External/                    # Integraciones externas (por ejemplo Google Calendar)
+
+│   ├── Persistence/
+
+│   │   ├── Eloquent/
+
+│   │   │   ├── Models/
+
+│   │   │   │   ├── EloquentUser.php
+
+│   │   │   │   ├── EloquentSpace.php
+
+│   │   │   │   └── EloquentReservation.php
+
+│   │   │   └── Repositories/
+
+│   │   │       ├── EloquentUserRepository.php
+
+│   │   │       ├── EloquentSpaceRepository.php
+
+│   │   │       └── EloquentReservationRepository.php
+
+│   │   └── Migrations/
+
+│   ├── Http/
+
+│   │   ├── Controllers/
+
+│   │   │   ├── UserController.php
+
+│   │   │   ├── SpaceController.php
+
+│   │   │   ├── ReservationController.php
+
+│   │   │   └── AdminController.php
+
+│   │   ├── Requests/
+
+│   │   │   ├── CreateUserRequest.php
+
+│   │   │   ├── CreateReservationRequest.php
+
+│   │   │   └── LoginRequest.php
+
+│   │   └── Resources/
+
+│   │       ├── UserResource.php
+
+│   │       ├── SpaceResource.php
+
+│   │       └── ReservationResource.php
+
+│   ├── Notifications/
+
+│   │   ├── EmailNotificationAdapter.php
+
+│   │   └── MockNotificationAdapter.php
+
+│   └── External/
+
+│       └── GoogleCalendarAdapter.php (futuro)
+
 │
-└── Providers/                       # Inyección de dependencias
-    └── DomainServiceProvider.php
+└── Providers/
+
+    └── DomainServiceProvider.php    # Inyección de dependencias
+    
 
 
 
